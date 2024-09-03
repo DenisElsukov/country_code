@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Lookup</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        input[type="text"] { width: 100%; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Phone Number Lookup</h1>
+    <input type="text" id="phoneNumber" placeholder="Enter phone number">
+    <button onclick="lookupCountry()">Lookup Country</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    function lookupCountry() {
+        const number = document.getElementById('phoneNumber').value;
+        fetch(`http://localhost:8088/api/phone/country?number=${number}`)
+            .then(response => response.text())
+            .then(data => document.getElementById('result').innerText = data)
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>
